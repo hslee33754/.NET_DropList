@@ -28,8 +28,9 @@ public partial class _Default : System.Web.UI.Page
         var shs = from sd in showentities.ShowDetails
                   join a in showentities.Artists on sd.ArtistKey equals a.ArtistKey
                   join s in showentities.Shows on sd.ShowKey equals s.ShowKey
+                  join v in showentities.Venues on s.VenueKey equals v.VenueKey
                   where a.ArtistName == DropDownList1.SelectedItem.Text
-                  select new { s.ShowName, a.ArtistName, sd.ShowDetailArtistStartTime };
+                  select new { s.ShowName, a.ArtistName, s.ShowTime, sd.ShowDetailArtistStartTime, v.VenueName };
         GridView1.DataSource = shs.ToList();
         GridView1.DataBind();
 
